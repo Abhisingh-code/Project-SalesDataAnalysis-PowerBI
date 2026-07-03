@@ -1,4 +1,4 @@
-# Sales-Data-Analysis Dashboard
+# Sales Data Analysis Dashboard
 
 ### Dashboard Link : https://app.powerbi.com/groups/me/reports/dd477caa-bba9-4174-92a8-9d8749c76d32/78bae55938c7b3fdd5f2?redirectedFromSignup=1&experience=power-bi
 
