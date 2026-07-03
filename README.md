@@ -22,21 +22,27 @@ Step 3 : Also since by default, profile will be opened only for 1000 rows so you
 
 Step 4 : In "Dim Promotion" table in Power Query Editor, under add column, conditional column was selected and column named  "Percentage" was added and in "PromotionID" "0" represents no discount was given.
 
-Step 5 :It was observed that in none of the columns errors & empty values were present except columns named "Price Per Unit", "Total Sales", "Discount Percentage", "Discount Value", "Net       Sales" contains null values in (Fact Table).
+Step 5 :It was observed that in none of the columns errors & empty values were present except columns named "Price Per Unit", "Total Sales", "Discount Percentage", "Discount Value", "Net Sales" contains null values in (Fact Table).
 
-Step 6 : Under Home tab, Merge Queries, Left Outer join was applied between "Fact table" and "Dim Product" using ProductID,
+Step 6 : Under Home tab, Merge Queries, Left Outer join was applied between "Fact table" and "Dim Product" using ProductID, for  bringing values to "Price Per Unit" column
 
-      (a) For bringing values to "Price Per Unit" column
+      (a) For "Total Sales", under add column, Custom column was selected ("Unit sold" and "Price Per Unit" columns was multiplied)
 
-      (b) For "Total Sales", under add column, Custom column was selected ("Unit sold" and "Price Per Unit" columns was multiplied)
+![Total Sales](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-TS.jpg)
 
-      (c) Left Outer join was applied between "Fact table" and "Dim Promotion" using "PromotionID" for "Discount percentage" and null values was replaced by "0"
+      (b) Left Outer join was applied between "Fact table" and "Dim Promotion" using "PromotionID" for "Discount percentage" and null values was replaced by "0"
 
-      (d) For "Discount Value" ("Total Sales" and "Discount Value" was multiplied and divided by 100) and changed the column name to "Discount"
+      (c) For "Discount Value" ("Total Sales" and "Discount Value" was multiplied and then divided by 100) and changed the column name to "Discount"
 
-      (e) For "Net Sales" ("Total Sales" and "Discount" was subtracted)
+![Discount](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-DIS.jpg)
 
-      (f) "Profit" column was added in "Fact Table" (0.1 * "Net Sales") 
+      (d) For "Net Sales" ("Total Sales" and "Discount" was subtracted)
+
+![Net Sales](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-NS.jpg)
+
+      (e) "Profit" column was added in "Fact Table" by calculatiing (0.1 * "Net Sales") 
+
+![Profit](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-PROFIT.jpg)      
 
 ## Top/Bottom 5 Analysis
 
@@ -81,6 +87,8 @@ Step 12 : In "Fact table" an Index Column was added and renamed it as "OrderID" 
 
 Step 13 : A card visuals were added to represent "Number of Orders" and "OrderID"[Count(Distinct)] was added in the fields.
 
+![Card](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-CARD.jpg)
+
 Step 14 : Two new tables were added, Under Modelling tab-new table
 
      (1) Date Table 1(DAX)
@@ -88,12 +96,15 @@ Step 14 : Two new tables were added, Under Modelling tab-new table
 
      (2) Date Table 2(DAX)  
          Date Table 2 = CALENDARAUTO() 
-and as we want the data type same for the both the tables, In table view, under column tools tab, Data type(Date) was selected and Format(Long date) was selected and in model view, one to many relationship was created between "Fact table" and the "Date Tables(1 & 2)" and the "Date Table 2" was not kept active.
+         
+and keep the data type same for the both the tables, In table view, under column tools tab, Data type(Date) was selected and Format(Long date) was selected and in model view, one to many relationship was created between "Fact table" and the "Date Tables(1 & 2)" and the "Date Table 2" was not kept active.
 
 
 ## Comparison Sales/Profit/Quantity Approach 1 (It is not a recommended model cause it will increase the size Cause two Dax measures were used here to create Date Table)
 
 Step 15 : Slicers were added for filtering data by field  "Date" form "Date Table 1" and "Date table 2".
+
+![Slicers](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-DF%201%20%26%202.jpg)
 
 Step 16 : Measures were created to calculate Total Sales, Total Profit and Total Quantity sold.
 
@@ -133,6 +144,8 @@ Step 20 : Slicers were added to Represent
 "Product Name" from (Dim Products),
 "Promotion Name" from (Dim Promotion)
 
+![Slicers](https://github.com/Abhisingh-code/Uploadingimages/blob/013945e509c033ef5bbacad048d9df072831103e/PJ-SDA-SLICERSTV.jpg)
+
 and new Dax Measure was created to make all slicers interact with each other
 
 Sum Dim = SUM('Fact Table'[Net Sales   ])
@@ -141,13 +154,18 @@ now under Filters pane, Select customer Name, and in add data fields here add "S
 "Date", "Product Name", "Promotion Name". 
  
 Step 21 : The report was then published to Power BI Service.
+
 Snapshot of Dashboard (Power BI Service)
 
-(Dashboard snapshot)
+![Overview](https://github.com/Abhisingh-code/Uploadingimages/blob/2385c62d9bce03958825ae724384fe2ce47c47b0/PJ-SDA-pg1.jpg)
 
-Report Snapshot (Power BI DESKTOP)
+![Top/Bottom 5 Analysis](https://github.com/Abhisingh-code/Uploadingimages/blob/2385c62d9bce03958825ae724384fe2ce47c47b0/PJ-SDA-pg2.jpg)
 
-(Report snapshot)
+![Comparison Sales/Profit/Quantity Approach 1](https://github.com/Abhisingh-code/Uploadingimages/blob/2385c62d9bce03958825ae724384fe2ce47c47b0/PJ-SDA-pg3.jpg)
+
+![Comparison Sales/Profit/Quantity Approach 2](https://github.com/Abhisingh-code/Uploadingimages/blob/2385c62d9bce03958825ae724384fe2ce47c47b0/PJ-SDA-pg4.jpg)
+
+![Table Visual](https://github.com/Abhisingh-code/Uploadingimages/blob/2385c62d9bce03958825ae724384fe2ce47c47b0/PJ-SDA-pg5.jpg)
 
 
 ### Insights
